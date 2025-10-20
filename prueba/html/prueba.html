@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Terminal de Buses</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* TU CSS PERSONALIZADO APLICADO AQUÍ */
+        :root{
+            --turquesa: #20cd8d;
+            --turquesaOscuro: #046b46;
+            --turquesaClaro: #ccf4e5;
+
+            --celesteApagadoOscuro: #2d4048;
+            --celesteApagado: #182527;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+        body {
+            display: flex;
+            flex-direction: column;
+            background-color: var(--celesteApagado); 
+            font-family: Arial, sans-serif; 
+            margin: 0;
+            padding: 10px;
+            min-height: 98vh;
+        }
+
+        /* --- Header --- */
+        header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        h2{
+            color: var(--turquesa);
+            font-size: 2rem;
+            font-family: "Pacifico", cursive;
+        }
+
+        /* --- Main --- */
+        main{
+            flex: 1;
+        }
+        
+        #camposRellenar{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content:center;
+            align-items: center;
+            margin: 15px 0;
+            padding: 15px;
+            background-color: var(--celesteApagadoOscuro);
+            border-radius: 20px;
+        }
+
+        #camposRellenar .input-group {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        #camposRellenar label{
+            padding: 8px 15px;
+            border-radius: 25px;
+            background: var(--turquesaOscuro);
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        
+        .boton-accion {
+            padding: 10px 20px;
+            border-radius: 25px;
+            background: var(--turquesa);
+            color: var(--celesteApagadoOscuro);
+            font-weight: bold;
+            border: transparent;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .boton-accion:hover {
+            background: var(--turquesaOscuro);
+            color: white;
+        }
+        
+        #camposRellenar input{
+            border-radius: 25px;
+            border: transparent;
+            background: var(--turquesaClaro);
+            padding: 8px 12px;
+            width: 80px; /* Ancho fijo para los inputs numéricos */
+        }
+        
+        #contenedorGeneral{
+            padding: 10px;
+            display: flex;
+            align-items: stretch;
+            gap: 10px;
+            height: 60vh;   
+        }
+        
+        #contenedorGrafico{
+            background: var(--celesteApagadoOscuro);
+            border-radius: 40px;
+            width: 75%;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #grafico {
+            width: 100% !important;
+            height: 100% !important;
+        }
+        
+        #contenedorTabla{
+            width: 25%;
+            background: var(--celesteApagadoOscuro);
+            border-radius: 40px;
+            overflow-y: auto;
+            scrollbar-width: none; /* Para Firefox */
+            -ms-overflow-style: none; /* Para IE y Edge */
+            padding: 20px;
+        }
+        #contenedorTabla::-webkit-scrollbar {
+             display: none; /* Para Chrome, Safari y Opera */
+        }
+
+        #tabla {
+            width: 90%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            color: white;
+            margin: 0 auto;
+        }
+
+        #tabla thead {
+            position: sticky;
+            top: -20px; /* Ajuste para el padding del contenedor */
+            background: var(--turquesaOscuro);
+            color: white;
+            z-index: 3; 
+        }
+
+        #tabla th, #tabla td {
+            padding: 8px;
+            text-align: center;
+            border-bottom: 2px solid var(--turquesaClaro);
+        }
+
+        #tabla tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        canvas { 
+            background-color: var(--turquesaClaro);
+            border-radius:25px;
+            padding: 10px;
+        }
+
+        /* Estilos para la sección de resultados de la simulación */
+        #resultadosSimulacion {
+            color: white;
+            padding: 10px;
+        }
+        #resultadosSimulacion h3 {
+            color: var(--turquesa);
+            text-align: center;
+        }
+        #resultadosSimulacion p {
+            background-color: rgba(0,0,0,0.2);
+            padding: 8px;
+            border-radius: 5px;
+        }
+
+        /* --- Footer --- */
+        footer{
+            background: var(--celesteApagadoOscuro);
+            border-radius: 30px;
+            margin: 10px 0 0 0;
+            padding: 0 20px;
+        }
+        
+        #copy{
+            display: flex;
+            align-items: center;
+            color: var(--turquesa);
+            font-weight: bold;
+        }
+        
+        #nosotros{
+            padding: 10px;
+            color: var(--turquesa);
+            font-weight: bold;
+        }
+        
+        #contenedorFooter{
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* --- Mediasquery --- */
+        @media (max-width: 1150px) {
+            #contenedorGeneral {
+                flex-direction: column;
+                height: auto;
+                max-height: none;
+                align-items: center;
+            }
+            #contenedorGrafico, #contenedorTabla {
+                width: 95%;
+                min-width: unset;
+                height: 50vh;
+            }
+        }
+        @media (max-width: 768px) {
+            #camposRellenar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            header { flex-direction: column; }
+            #contenedorFooter { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h2>Simulador de Colas</h2>
+        <div id="nosotros">Modelo de Simulación - Terminal de Buses</div>
+    </header>
+
+    <main>
+        <div id="camposRellenar">
+            <div class="input-group">
+                <label for="x0">Semilla (X0):</label>
+                <input type="number" id="x0" value="101121">
+            </div>
+            <div class="input-group">
+                <label for="a">Multiplicador (a):</label>
+                <input type="number" id="a" value="1664525">
+            </div>
+            <div class="input-group">
+                <label for="c">Incremento (c):</label>
+                <input type="number" id="c" value="1013904223">
+            </div>
+            <div class="input-group">
+                <label for="m">Módulo (m):</label>
+                <input type="number" id="m" value="4294967296">
+            </div>
+            <div class="input-group">
+                <label for="n">N° a Generar:</label>
+                <input type="number" id="n" value="100">
+            </div>
+            <button class="boton-accion" onclick="generar()">Probar Generador</button>
+            <hr style="width: 100%; border-color: var(--turquesaOscuro);">
+            <div class="input-group">
+                <label for="tasaLlegada">λ (buses/hr):</label>
+                <input type="number" id="tasaLlegada" value="5">
+            </div>
+            <div class="input-group">
+                <label for="tiempoServicio">T. Servicio (min):</label>
+                <input type="number" id="tiempoServicio" value="15">
+            </div>
+            <div class="input-group">
+                <label for="desvioServicio">Desvío T.S. (min):</label>
+                <input type="number" id="desvioServicio" value="3">
+            </div>
+            <div class="input-group">
+                <label for="numAndenes">Andenes:</label>
+                <input type="number" id="numAndenes" value="2">
+            </div>
+            <div class="input-group">
+                <label for="horasSimulacion">Horas Simulación:</label>
+                <input type="number" id="horasSimulacion" value="24">
+            </div>
+            <button class="boton-accion" onclick="iniciarSimulacion()">Iniciar Simulación</button>
+        </div>
+
+        <div id="contenedorGeneral">
+            <div id="contenedorGrafico">
+                <canvas id="grafico"></canvas>
+            </div>
+            <div id="contenedorTabla">
+                <div id="resultadosSimulacion">
+                    <h3>📊 Resultados de la Simulación</h3>
+                    <p>Presione "Iniciar Simulación" para ver los resultados.</p>
+                </div>
+                <table id="tabla">
+                    <thead>
+                        <tr>
+                            <th>Iteración (i)</th>
+                            <th>Valor (Ui)</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div id="contenedorFooter">
+            <div id="copy">&copy; 2025 - Grupo de Simulación</div>
+            <div id="nosotros">Proyecto Final</div>
+        </div>
+    </footer>
+
+    <script src="generador.js"></script>
+    <script src="simulador.js"></script>
+
+</body>
+</html>
