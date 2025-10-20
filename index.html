@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Generador Congruencial Mixto</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="./static/css/base.css">
+  
+</head>
+<body>
+  <header>
+    <div>
+      <img src="./static/img/ChatGPT Image 22 sept 2025, 10_24_58 p.m..png" width="100px" alt="logo de GCM">
+    </div>
+
+    <div>
+      <h2>- GCM -</h2>
+    </div>
+
+    <div>
+      <img src="./static/img/ChatGPT Image 22 sept 2025, 10_17_59 p.m..png" width="70px">
+    </div>
+
+  </header>
+
+  <main>
+      <div id="camposRellenar">
+          <label>X0: <input type="number" id="x0" value="7531"></label>
+          <label>A: <input type="number" id="a" value="593"></label>
+          <label>C: <input type="number" id="c" value="789"></label>
+          <label>M: <input type="number" id="m" value="9897"></label>
+          <label>N: <input type="number" id="n" value="40"></label>
+
+          <button onclick="generar()" id="botonGenerar"><img src="./static/img/ChatGPT Image 22 sept 2025, 10_24_58 p.m..png" width="60px"></button>
+      </div>
+
+      <div id="contenedorGeneral">
+          <div id="contenedorGrafico">
+              <canvas id="grafico"></canvas>
+          </div>
+
+          <div id="contenedorTabla">
+            <table id="tabla" border="1">
+              <thead>
+                <tr>
+                  <th>Iteración</th>
+                  <th>Valor (Ui)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Aquí con JS insertamos las filas de la tabla -->
+              </tbody>
+            </table>
+          </div>
+      </div>
+  </main>
+  
+  <footer>
+      <div id="contenedorFooter">
+        <div id="copy">
+          <img src="./static/img/ChatGPT Image 22 sept 2025, 10_24_58 p.m..png" width="90px">
+          <p>&copy; Grupo Mate - 2025</p>
+        </div>
+
+        <div>
+          <p id="nosotros">
+            Maidana Alejo Leonel <br>
+            Cirione Erick <br>
+            Barrionuevo Emir <br>
+          </p>
+        </div>
+      </div>
+  </footer>
+  
+  <script src="./js/index.js"></script>
+
+</body>
+</html>
