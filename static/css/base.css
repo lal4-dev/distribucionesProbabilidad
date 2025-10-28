@@ -259,9 +259,7 @@ footer {
         align-items: stretch;
     }
 
-    header {
-        flex-direction: column;
-    }
+   
 
     #contenedorFooter {
         flex-direction: column;
