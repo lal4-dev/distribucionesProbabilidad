@@ -32,6 +32,7 @@ h2 {
     color: var(--turquesa);
     font-size: 2rem;
     font-family: "Pacifico", cursive;
+    text-align:  center;
 }
 
 h3{
