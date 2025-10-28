@@ -51,6 +51,7 @@ function iniciarSimulacion() {
     const colaEspera = [];
     const tiemposDeEsperaEnCola = [];
     let totalBusesAtendidos = 0;
+    let totalLlegadas = 0;
     const llegadasPorHora = new Array(tiempoSimulacionHoras).fill(0);
     const eventos = [];
 
@@ -66,6 +67,7 @@ function iniciarSimulacion() {
         if (reloj > tiempoSimulacionMinutos) break;
 
         if (eventoActual.tipo === 'LLEGADA') {
+            totalLlegadas++;
             const horaActual = Math.floor(reloj / 60);
             if (horaActual < tiempoSimulacionHoras) {
                 llegadasPorHora[horaActual]++;
@@ -107,6 +109,7 @@ function iniciarSimulacion() {
     }
     
     resultadosDiv.innerHTML += `
+        <p><strong>Total de buses que llegaron:</strong> ${totalLlegadas}</p>
         <p><strong>Total de buses atendidos:</strong> ${totalBusesAtendidos}</p>
         <p><strong>Tiempo promedio de espera en cola:</strong> ${esperaPromedio.toFixed(2)} minutos</p>
         <p><strong>Tiempo máximo de espera en cola:</strong> ${esperaMaxima.toFixed(2)} minutos</p>
