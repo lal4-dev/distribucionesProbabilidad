@@ -1,4 +1,5 @@
-:root{
+/* TU CSS PERSONALIZADO APLICADO AQUÍ */
+:root {
     --turquesa: #20cd8d;
     --turquesaOscuro: #046b46;
     --turquesaClaro: #ccf4e5;
@@ -12,180 +13,231 @@
 body {
     display: flex;
     flex-direction: column;
-    background-color: var(--celesteApagado); 
-    font-family: Arial, sans-serif; 
-
-    height: 100%;
-    min-height: 99vh;
+    background-color: var(--celesteApagado);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 10px;
+    min-height: 98vh;
 }
 
-/*Aca empieza el header*/
-header{
+/* --- Header --- */
+header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
 }
 
-h2{
+h2 {
     color: var(--turquesa);
     font-size: 2rem;
     font-family: "Pacifico", cursive;
 }
-/*Aca termina el header*/
 
-/*Aca empieza el main*/
-#camposRellenar{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    justify-content:center;
-    margin-left: 10px;
-}
-
-main{
+/* --- Main --- */
+main {
     flex: 1;
 }
 
-#camposRellenar label{
-    padding: 5px;
-    padding-left: 20px;
+#camposRellenar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    margin: 15px 0;
+    padding: 15px;
+    background-color: var(--celesteApagadoOscuro);
+    border-radius: 20px;
+}
+
+#camposRellenar .input-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#camposRellenar label {
+    padding: 8px 15px;
     border-radius: 25px;
+    background: var(--turquesaOscuro);
+    color: white;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.boton-accion {
+    padding: 10px 20px;
+    border-radius: 25px;
+    background: var(--turquesa);
+    color: var(--celesteApagadoOscuro);
+    font-weight: bold;
+    border: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.boton-accion:hover {
     background: var(--turquesaOscuro);
     color: white;
 }
 
-#botonGenerar{
-    border-radius: 25px;
-    background: var(--turquesaOscuro);
-    border: transparent;
-}
-
-#camposRellenar input{
+#camposRellenar input {
     border-radius: 25px;
     border: transparent;
     background: var(--turquesaClaro);
+    padding: 8px 12px;
+    width: 80px;
+    /* Ancho fijo para los inputs numéricos */
 }
 
-#contenedorGeneral{
-    padding: 20px;
+#contenedorGeneral {
+    padding: 10px;
     display: flex;
     align-items: stretch;
     gap: 10px;
-    max-height: 650px;   
+    height: 60vh;
 }
 
-#contenedorGrafico{
+#contenedorGrafico {
     background: var(--celesteApagadoOscuro);
     border-radius: 40px;
-    width: 80%;
+    width: 75%;
     padding: 20px;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #grafico {
-    width: 97% !important;
-    height: 97% !important;
+    width: 100% !important;
+    height: 100% !important;
 }
 
-#contenedorTabla{
-    width: 20%;
+#contenedorTabla {
+    width: 25%;
     background: var(--celesteApagadoOscuro);
     border-radius: 40px;
-    display: block;
-    align-items: center;
-    justify-content: center;
     overflow-y: auto;
-    flex: 1;    
     scrollbar-width: none;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    /* Para Firefox */
+    -ms-overflow-style: none;
+    /* Para IE y Edge */
+    padding: 20px;
+}
+
+#contenedorTabla::-webkit-scrollbar {
+    display: none;
+    /* Para Chrome, Safari y Opera */
 }
 
 #tabla {
-    width: 80%;
+    width: 90%;
     border-collapse: collapse;
     font-size: 0.9rem;
     color: white;
     margin: 0 auto;
-    border-radius: 20px;
 }
 
 #tabla thead {
-    top: 0px;
+    position: sticky;
+    top: -20px;
+    /* Ajuste para el padding del contenedor */
     background: var(--turquesaOscuro);
     color: white;
-    z-index: 3; 
+    z-index: 3;
 }
 
-#tabla th, #tabla td {
-    padding: 6px 8px;
+#tabla th,
+#tabla td {
+    padding: 8px;
     text-align: center;
     border-bottom: 2px solid var(--turquesaClaro);
-}
-
-#tabla th{
-    padding-top: 10px;
 }
 
 #tabla tr:nth-child(even) {
     background-color: rgba(255, 255, 255, 0.05);
 }
 
-input { 
-    margin: 5px; 
-    padding: 5px; 
-}
-
-canvas { 
+canvas {
     background-color: var(--turquesaClaro);
-    border-radius:40px;
+    border-radius: 25px;
     padding: 10px;
-    margin: 10px;  
 }
-/*Aca termina el main*/
 
-/*Aca empieza el footer*/
-footer{
+/* Estilos para la sección de resultados de la simulación */
+#resultadosSimulacion {
+    color: white;
+    padding: 10px;
+}
+
+#resultadosSimulacion h3 {
+    color: var(--turquesa);
+    text-align: center;
+}
+
+#resultadosSimulacion p {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 8px;
+    border-radius: 5px;
+}
+
+/* --- Footer --- */
+footer {
     background: var(--celesteApagadoOscuro);
     border-radius: 30px;
-    margin: 10px;
+    margin: 10px 0 0 0;
+    padding: 0 20px;
 }
 
-#copy{
+#copy {
     display: flex;
     align-items: center;
     color: var(--turquesa);
     font-weight: bold;
 }
 
-#nosotros{
+#nosotros {
     padding: 10px;
     color: var(--turquesa);
     font-weight: bold;
 }
 
-#contenedorFooter{
+#contenedorFooter {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-/*Aca termina el footer*/
 
-/*Aca tenemos las mediasquery*/
+/* --- Mediasquery --- */
 @media (max-width: 1150px) {
     #contenedorGeneral {
         flex-direction: column;
+        height: auto;
         max-height: none;
         align-items: center;
     }
 
-    #contenedorGrafico,#contenedorTabla {
-        width: 97%;
+    #contenedorGrafico,
+    #contenedorTabla {
+        width: 95%;
         min-width: unset;
+        height: 50vh;
+    }
+}
+
+@media (max-width: 768px) {
+    #camposRellenar {
+        flex-direction: column;
+        align-items: stretch;
     }
 
-    #grafico {
-        width:  100%;
-        height: 100%;
+    header {
+        flex-direction: column;
+    }
+
+    #contenedorFooter {
+        flex-direction: column;
     }
 }
