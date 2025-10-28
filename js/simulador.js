@@ -111,7 +111,7 @@ function iniciarSimulacion() {
         <p><strong>Tiempo promedio de espera en cola:</strong> ${esperaPromedio.toFixed(2)} minutos</p>
         <p><strong>Tiempo máximo de espera en cola:</strong> ${esperaMaxima.toFixed(2)} minutos</p>
         <hr>
-        <h4>Validación Hipótesis de Poisson</h4>
+        <h3>Validación Hipótesis de Poisson</h3>
         <p><strong>Media de llegadas por hora (observada):</strong> ${llegadasMedia.toFixed(4)}</p>
         <p><strong>Varianza de llegadas por hora (observada):</strong> ${llegadasVarianza.toFixed(4)}</p>
     `;
