@@ -266,4 +266,16 @@ footer {
     #contenedorFooter {
         flex-direction: column;
     }
+    div.input-group label
+    {
+        width:  50%;
+    }
+    #camposRellenar input {
+    border-radius: 25px;
+    border: transparent;
+    background: var(--turquesaClaro);
+    padding: 8px 12px;
+    width: 50%;
+    /* Ancho fijo para los inputs numéricos */
+}
 }
