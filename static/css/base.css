@@ -260,6 +260,9 @@ footer {
         align-items: stretch;
     }
 
+    h2{
+        font-size: 1.1rem;
+    }
    
 
     #contenedorFooter {
